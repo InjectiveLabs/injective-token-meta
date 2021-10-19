@@ -54,3 +54,5 @@ func buildAddressMap() map[string]string {
 		KovanYFIAddress:   MainnetYFIAddress,
 	}
 }
+
+const ethereum = "ethereum"

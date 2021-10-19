@@ -7,10 +7,9 @@ import (
 	log "github.com/xlab/suplog"
 	"io/ioutil"
 	"os"
+	"strings"
 	"time"
 )
-
-
 
 func main() {
 	ctx := context.Background()
@@ -33,13 +32,37 @@ func main() {
 	orPanicf(err, "failed to json unmarshal token meta file content\n")
 
 	log.Infof("got token meta map, [%d] tokens' metadata need to be filled\n", len(tokenMetaMap))
+
+	cgTicker := time.NewTicker(1500 * time.Millisecond)
+	defer cgTicker.Stop()
 	// fill metas for each
 	addressMap := buildAddressMap()
 	for token := range tokenMetaMap {
+		if tokenMetaMap[token] == nil {
+			log.Warningf("empty token [%s]\n", token)
+			continue
+		}
+
+		if tokenMetaMap[token].CoingeckoID == "" {
+			log.Warningf("empty coingecko id of token [%s], might cause an error when query token's price\n", token)
+		} else {
+			<-cgTicker.C
+			coin := GetCoingeckoTokenDetail(tokenMetaMap[token].CoingeckoID)
+			if strings.ToLower(coin.AssetPlatformId) != ethereum {
+				log.Warningf("token [%s] platform [%s] is not %s\n", token, coin.AssetPlatformId, ethereum)
+			}
+			if strings.ToLower(coin.Platforms[ethereum]) != strings.ToLower(tokenMetaMap[token].Address) {
+				log.Warningf("token [%s] address [%s] is not same as in coingecko resp [%s], platforms: [%+v]\n",
+					token, tokenMetaMap[token].Address, coin.Platforms[ethereum], coin.Platforms)
+			}
+			// address is valid
+		}
+
 		tokenAddressHex := tokenMetaMap[token].Address
 		if tokenAddressHex == "" {
 			continue
 		}
+
 		mainnetAddressHex := addressMap[tokenAddressHex]
 
 		if mainnetAddressHex != "" {

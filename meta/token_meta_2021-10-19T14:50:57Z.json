@@ -69,16 +69,6 @@
       "logo": "https://static.alchemyapi.io/images/assets/4687.png"
     }
   },
-  "CEL": {
-    "address": "0xaaaebe6fe48e54f431b0c390cfaf0b017d09d42d",
-    "coinGeckoId": "celsius-degree-token",
-    "meta": {
-      "name": "Celsius",
-      "symbol": "CEL",
-      "decimals": 4,
-      "logo": "https://static.alchemyapi.io/images/assets/2700.png"
-    }
-  },
   "CELL": {
     "address": "0x26c8afbbfe1ebaca03c2bb082e69d0476bffe099",
     "coinGeckoId": "cellframe",
@@ -269,16 +259,6 @@
       "logo": "https://static.alchemyapi.io/images/assets/8508.png"
     }
   },
-  "QNT": {
-    "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
-    "coinGeckoId": "quant-network",
-    "meta": {
-      "name": "Quant",
-      "symbol": "QNT",
-      "decimals": 18,
-      "logo": "https://static.alchemyapi.io/images/assets/3155.png"
-    }
-  },
   "RUNE": {
     "address": "0x3155BA85D5F96b2d030a4966AF206230e46849cb",
     "coinGeckoId": "thorchain-erc20",
@@ -438,5 +418,13 @@
       "decimals": 18,
       "logo": "https://static.alchemyapi.io/images/assets/1896.png"
     }
+  },
+  "QNT": {
+    "address": "0x4a220e6096b25eadb88358cb44068a3248254675",
+    "coinGeckoId": "quant-network"
+  },
+  "CEL": {
+    "address": "0xaaaebe6fe48e54f431b0c390cfaf0b017d09d42d",
+    "coinGeckoId": "celsius-degree-token"
   }
 }
