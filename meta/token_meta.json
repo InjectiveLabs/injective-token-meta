@@ -30,6 +30,28 @@
       "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png"
     }
   },
+  "LUNA": {
+    "address": "0xd2877702675e6ceb975b4a1dff9fb7baf4c91ea9",
+    "coinGeckoId": "terra-luna",
+    "denom": "ibc/B8AF5D92165F35AB31F3FC7C7B444B9D240760FA5D406C49D24862BD0284E395",
+    "meta": {
+      "name": "Terra",
+      "symbol": "LUNA",
+      "decimals": 6,
+      "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/4172.png"
+    }
+  },
+  "UST": {
+    "address": "0xa47c8bf37f92aBed4A126BDA807A7b7498661acD",
+    "coinGeckoId": "terrausd",
+    "denom": "ibc/B448C0CA358B958301D328CCDC5D5AD642FC30A6D3AE106FF721DB315F3DDE5C",
+    "meta": {
+      "name": "TerraUSD",
+      "symbol": "UST",
+      "decimals": 6,
+      "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/7129.png"
+    }
+  },
   "AXS": {
     "address": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
     "coinGeckoId": "axie-infinity",
