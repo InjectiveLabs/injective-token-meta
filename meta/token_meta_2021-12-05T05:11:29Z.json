@@ -34,30 +34,6 @@
       "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/3794.png"
     }
   },
-  "LUNA": {
-    "address": "0xd2877702675e6ceb975b4a1dff9fb7baf4c91ea9",
-    "coinGeckoId": "terra-luna",
-    "denom": "ibc/b8af5d92165f35ab31f3fc7c7b444b9d240760fa5d406c49d24862bd0284e395",
-    "metaSource": "custom",
-    "meta": {
-      "name": "Terra",
-      "symbol": "LUNA",
-      "decimals": 6,
-      "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/4172.png"
-    }
-  },
-  "UST": {
-    "address": "0xa47c8bf37f92abed4a126bda807a7b7498661acd",
-    "coinGeckoId": "terrausd",
-    "denom": "ibc/b448c0ca358b958301d328ccdc5d5ad642fc30a6d3ae106ff721db315f3dde5c",
-    "metaSource": "custom",
-    "meta": {
-      "name": "TerraUSD",
-      "symbol": "UST",
-      "decimals": 6,
-      "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/7129.png"
-    }
-  },
   "AXS": {
     "address": "0xbb0e17ef65f82ab018d8edd776e8dd940327b28b",
     "coinGeckoId": "axie-infinity",
@@ -273,6 +249,18 @@
       "logo": "https://static.alchemyapi.io/images/assets/1975.png"
     }
   },
+  "LUNA": {
+    "address": "0xd2877702675e6ceb975b4a1dff9fb7baf4c91ea9",
+    "coinGeckoId": "terra-luna",
+    "denom": "ibc/b8af5d92165f35ab31f3fc7c7b444b9d240760fa5d406c49d24862bd0284e395",
+    "metaSource": "custom",
+    "meta": {
+      "name": "Terra",
+      "symbol": "LUNA",
+      "decimals": 6,
+      "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/4172.png"
+    }
+  },
   "MATIC": {
     "address": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
     "coinGeckoId": "matic-network",
@@ -476,6 +464,18 @@
       "symbol": "USDT",
       "decimals": 6,
       "logo": "https://static.alchemyapi.io/images/assets/825.png"
+    }
+  },
+  "UST": {
+    "address": "0xa47c8bf37f92abed4a126bda807a7b7498661acd",
+    "coinGeckoId": "terrausd",
+    "denom": "ibc/b448c0ca358b958301d328ccdc5d5ad642fc30a6d3ae106ff721db315f3dde5c",
+    "metaSource": "custom",
+    "meta": {
+      "name": "TerraUSD",
+      "symbol": "UST",
+      "decimals": 6,
+      "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/7129.png"
     }
   },
   "UTK": {

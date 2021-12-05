@@ -5,11 +5,19 @@ import (
 	"strings"
 )
 
+type MetaSource string
+
+const (
+	MetaSourceAlchemy MetaSource = "alchemy" // query from Alchemy API
+	MetaSourceCustom  MetaSource = "custom"  // defined in Customizers
+)
+
 type Token struct {
-	Address     string `json:"address"`
-	CoingeckoID string `json:"coinGeckoId"`
-	Denom       string `json:"denom,omitempty"`
-	Meta        *Meta  `json:"meta"`
+	Address     string     `json:"address"`
+	CoingeckoID string     `json:"coinGeckoId"`
+	Denom       string     `json:"denom,omitempty"`
+	MetaSource  MetaSource `json:"metaSource"`
+	Meta        *Meta      `json:"meta"`
 }
 
 // Meta this struct is the same as the metadata in the resp of Alchemy

@@ -52,11 +52,6 @@ func main() {
 	}
 	log.Infof("finished fetching tokens' metadata\n")
 	log.Infof(logDivider)
-	for k, v := range tokenMetaCustomizerMap {
-		v(tokenMetaMap[k])
-	}
-	log.Infof("finished customized metadata for [%d] tokens\n", len(tokenMetaMap))
-	log.Infof(logDivider)
 
 	tokenMetaMap.check()
 
@@ -86,37 +81,53 @@ func fillTokenMeta(ctx context.Context, symbol string, t *Token) error {
 		return errors.Errorf("empty token\n")
 	}
 
+	// 1. check coinGeckoID, since we need that to query the token's price
 	if t.CoingeckoID == "" {
 		return errors.Errorf("empty coingecko id, might cause an error when query token's price\n")
 	} else {
 		coin := GetCoingeckoTokenDetail(t.CoingeckoID)
-		if strings.ToLower(coin.AssetPlatformId) != ethereum {
-			log.Warningf("token [%s] platform [%s] is not %s\n", symbol, coin.AssetPlatformId, ethereum)
-		}
 		if strings.ToLower(coin.Platforms[ethereum]) != strings.ToLower(t.Address) {
 			log.Warningf("token [%s] address [%s] is not same as in coingecko resp [%s], platforms: [%+v]\n",
 				symbol, t.Address, coin.Platforms[ethereum], coin.Platforms)
 		}
-		// address is valid
 	}
-	if t.Address == "" {
-		addr := GetEthereumAddressBySymbol(symbol)
-		if addr == "" {
-			log.Warningf("cannot solve ethereum address from symbol [%s], better to cover this in customizers\n", symbol)
-			return nil
+
+	switch t.MetaSource {
+	case MetaSourceAlchemy:
+		if t.Address == "" {
+			log.Infof("token [%s] doesn't have erc address, query that from CoinMarketCap by symbol", symbol)
+			addr := GetEthereumAddressFromCoinMarketCapBySymbol(symbol)
+			if addr == "" {
+				log.Panicf("cannot solve ethereum address from symbol [%s], better to cover this in customizers\n", symbol)
+			}
+			log.Infof("got erc address [%s] for token [%s]", addr, symbol)
+			t.Address = strings.ToLower(addr)
 		}
-		t.Address = strings.ToLower(addr)
+
+		metadata := getTokenMetaFromAlchemyByAddress(ctx, t.Address)
+		if metadata == nil {
+			log.Panicf("token metadata is empty, address: [%s]\n", t.Address)
+		}
+		t.Meta = metadata
+	case MetaSourceCustom:
+		// this means the token's meta is already set in the json file manually, just validate that
+		if t.Meta == nil {
+			log.Warningf("token [%s] meta source is custom while the meta is empty")
+		}
+		if t.Meta.Name == "" {
+			log.Warningf("token [%s] meta source is custom while the name is empty")
+		}
+		if t.Meta.Symbol == "" {
+			log.Warningf("token [%s] meta source is custom while the symbol is empty")
+		}
+		if t.Meta.Decimals == 0 {
+			log.Warningf("token [%s] meta source is custom while the decimal is zero")
+		}
+		if t.Meta.Logo == "" {
+			log.Warningf("token [%s] meta source is custom while the logo is empty")
+		}
 	}
 
-	metadata := getTokenMetaByAddress(ctx, t.Address)
-	if metadata == nil {
-		log.Panicf("token metadata is empty, address: [%s]\n", t.Address)
-	}
-	t.Meta = metadata
-
-	if t.Meta.Logo == "" {
-		t.Meta.Logo = GetLogoBySymbol(symbol)
-	}
 	return nil
 }
 

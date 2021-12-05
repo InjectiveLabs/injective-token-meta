@@ -38,7 +38,7 @@ func randID() int {
 	return int(1 + rand.Int63n(100000000))
 }
 
-func getTokenMetaByAddress(ctx context.Context, address string) *Meta {
+func getTokenMetaFromAlchemyByAddress(ctx context.Context, address string) *Meta {
 	if address == "" {
 		orPanicf(errors.Errorf("address is empty"), "invalid address")
 	}

@@ -39,7 +39,7 @@ func GetCoinInfoFromCoinMarketCap(symbol string) *Data {
 
 const PlatformEthereum = "Ethereum"
 
-func GetEthereumAddressBySymbol(symbol string) string {
+func GetEthereumAddressFromCoinMarketCapBySymbol(symbol string) string {
 	data := GetCoinInfoFromCoinMarketCap(symbol)
 	if data == nil || len(data.ContractAddress) == 0 {
 		return ""
